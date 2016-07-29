@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3390306E1D4AB892006894C9 /* Level5.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3390306D1D4AB892006894C9 /* Level5.sks */; };
 		33C1D0511D4974B200F848D2 /* BlackSun.sks in Resources */ = {isa = PBXBuildFile; fileRef = 33C1D04B1D4974B200F848D2 /* BlackSun.sks */; };
 		33C1D0521D4974B200F848D2 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C1D04C1D4974B200F848D2 /* CGFloat+Extensions.swift */; };
 		33C1D0531D4974B200F848D2 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C1D04D1D4974B200F848D2 /* CGPoint+Extensions.swift */; };
 		33C1D0541D4974B200F848D2 /* CGVector+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C1D04E1D4974B200F848D2 /* CGVector+Extensions.swift */; };
-		33C1D0551D4974B200F848D2 /* Enemy.sks in Resources */ = {isa = PBXBuildFile; fileRef = 33C1D04F1D4974B200F848D2 /* Enemy.sks */; };
 		33C1D0561D4974B200F848D2 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C1D0501D4974B200F848D2 /* Enemy.swift */; };
 		33C1D0591D4974CA00F848D2 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 33C1D0571D4974CA00F848D2 /* GameScene.sks */; };
 		33C1D05A1D4974CA00F848D2 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C1D0581D4974CA00F848D2 /* GameScene.swift */; };
@@ -36,6 +36,10 @@
 		33C1D0821D4974FE00F848D2 /* SKTTimingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C1D06F1D4974FE00F848D2 /* SKTTimingFunctions.swift */; };
 		33C1D0831D4974FE00F848D2 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C1D0701D4974FE00F848D2 /* spark.png */; };
 		33C1D0841D4974FE00F848D2 /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C1D0711D4974FE00F848D2 /* Vector3.swift */; };
+		33CAFC841D4A6D0D00C041B9 /* Enemy.sks in Resources */ = {isa = PBXBuildFile; fileRef = 33CAFC831D4A6D0D00C041B9 /* Enemy.sks */; };
+		33CAFC891D4A6E8600C041B9 /* Level2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 33CAFC881D4A6E8600C041B9 /* Level2.sks */; };
+		33CAFC8B1D4A7CEE00C041B9 /* Level3.sks in Resources */ = {isa = PBXBuildFile; fileRef = 33CAFC8A1D4A7CEE00C041B9 /* Level3.sks */; };
+		33CAFC8D1D4A924800C041B9 /* Level4.sks in Resources */ = {isa = PBXBuildFile; fileRef = 33CAFC8C1D4A924800C041B9 /* Level4.sks */; };
 		33D510A61D49736600F222F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D510A51D49736600F222F5 /* AppDelegate.swift */; };
 		33D510AF1D49736600F222F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33D510AD1D49736600F222F5 /* Main.storyboard */; };
 		33D510B11D49736600F222F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33D510B01D49736600F222F5 /* Assets.xcassets */; };
@@ -62,11 +66,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3390306D1D4AB892006894C9 /* Level5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level5.sks; sourceTree = "<group>"; };
 		33C1D04B1D4974B200F848D2 /* BlackSun.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BlackSun.sks; sourceTree = "<group>"; };
 		33C1D04C1D4974B200F848D2 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		33C1D04D1D4974B200F848D2 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		33C1D04E1D4974B200F848D2 /* CGVector+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGVector+Extensions.swift"; sourceTree = "<group>"; };
-		33C1D04F1D4974B200F848D2 /* Enemy.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Enemy.sks; sourceTree = "<group>"; };
 		33C1D0501D4974B200F848D2 /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		33C1D0571D4974CA00F848D2 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		33C1D0581D4974CA00F848D2 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -91,6 +95,10 @@
 		33C1D06F1D4974FE00F848D2 /* SKTTimingFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTTimingFunctions.swift; sourceTree = "<group>"; };
 		33C1D0701D4974FE00F848D2 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		33C1D0711D4974FE00F848D2 /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
+		33CAFC831D4A6D0D00C041B9 /* Enemy.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Enemy.sks; path = ../Enemy.sks; sourceTree = "<group>"; };
+		33CAFC881D4A6E8600C041B9 /* Level2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level2.sks; sourceTree = "<group>"; };
+		33CAFC8A1D4A7CEE00C041B9 /* Level3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level3.sks; sourceTree = "<group>"; };
+		33CAFC8C1D4A924800C041B9 /* Level4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level4.sks; sourceTree = "<group>"; };
 		33D510A21D49736600F222F5 /* PhysRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhysRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33D510A51D49736600F222F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33D510AE1D49736600F222F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -129,6 +137,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		336A74761D4A6CE4009A3011 /* Add-on Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				33C1D04C1D4974B200F848D2 /* CGFloat+Extensions.swift */,
+				33C1D04D1D4974B200F848D2 /* CGPoint+Extensions.swift */,
+				33C1D04E1D4974B200F848D2 /* CGVector+Extensions.swift */,
+				33C1D0691D4974FE00F848D2 /* SKAction+Extensions.swift */,
+				33C1D06A1D4974FE00F848D2 /* SKAction+SpecialEffects.swift */,
+				33C1D06B1D4974FE00F848D2 /* SKColor+Extensions.swift */,
+				33C1D06C1D4974FE00F848D2 /* SKNode+Extensions.swift */,
+				33C1D06D1D4974FE00F848D2 /* SKTAudio.swift */,
+				33C1D0601D4974FE00F848D2 /* Int+Extensions.swift */,
+				33C1D0651D4974FE00F848D2 /* MSButtonNode.swift */,
+				33C1D0661D4974FE00F848D2 /* MSToggleNode.swift */,
+				33C1D06E1D4974FE00F848D2 /* SKTEffects.swift */,
+				33C1D06F1D4974FE00F848D2 /* SKTTimingFunctions.swift */,
+				33C1D0711D4974FE00F848D2 /* Vector3.swift */,
+			);
+			name = "Add-on Stuff";
+			sourceTree = "<group>";
+		};
+		33CAFC851D4A6D8900C041B9 /* Character Files */ = {
+			isa = PBXGroup;
+			children = (
+				33C1D04B1D4974B200F848D2 /* BlackSun.sks */,
+				33C1D0501D4974B200F848D2 /* Enemy.swift */,
+				33C1D05D1D4974E100F848D2 /* Hero.sks */,
+				33CAFC831D4A6D0D00C041B9 /* Enemy.sks */,
+			);
+			name = "Character Files";
+			sourceTree = "<group>";
+		};
+		33CAFC861D4A6DA100C041B9 /* Scene Files */ = {
+			isa = PBXGroup;
+			children = (
+				33C1D0571D4974CA00F848D2 /* GameScene.sks */,
+				33C1D0581D4974CA00F848D2 /* GameScene.swift */,
+				33C1D0631D4974FE00F848D2 /* MainScene.sks */,
+				33C1D0641D4974FE00F848D2 /* MainScene.swift */,
+				33C1D0671D4974FE00F848D2 /* SettingsScene.sks */,
+				33C1D0681D4974FE00F848D2 /* SettingsScene.swift */,
+			);
+			name = "Scene Files";
+			sourceTree = "<group>";
+		};
+		33CAFC871D4A6DBC00C041B9 /* Levels */ = {
+			isa = PBXGroup;
+			children = (
+				33C1D0611D4974FE00F848D2 /* Level0.sks */,
+				33C1D0621D4974FE00F848D2 /* Level1.sks */,
+				33CAFC881D4A6E8600C041B9 /* Level2.sks */,
+				33CAFC8A1D4A7CEE00C041B9 /* Level3.sks */,
+				33CAFC8C1D4A924800C041B9 /* Level4.sks */,
+				3390306D1D4AB892006894C9 /* Level5.sks */,
+			);
+			name = Levels;
+			sourceTree = "<group>";
+		};
 		33D510991D49736600F222F5 = {
 			isa = PBXGroup;
 			children = (
@@ -152,36 +218,14 @@
 		33D510A41D49736600F222F5 /* PhysRunner */ = {
 			isa = PBXGroup;
 			children = (
-				33C1D04B1D4974B200F848D2 /* BlackSun.sks */,
-				33C1D04C1D4974B200F848D2 /* CGFloat+Extensions.swift */,
-				33C1D04D1D4974B200F848D2 /* CGPoint+Extensions.swift */,
-				33C1D04E1D4974B200F848D2 /* CGVector+Extensions.swift */,
-				33C1D04F1D4974B200F848D2 /* Enemy.sks */,
-				33C1D0501D4974B200F848D2 /* Enemy.swift */,
+				33CAFC851D4A6D8900C041B9 /* Character Files */,
+				336A74761D4A6CE4009A3011 /* Add-on Stuff */,
 				33D510A51D49736600F222F5 /* AppDelegate.swift */,
-				33C1D0571D4974CA00F848D2 /* GameScene.sks */,
-				33C1D0581D4974CA00F848D2 /* GameScene.swift */,
+				33CAFC861D4A6DA100C041B9 /* Scene Files */,
 				33C1D05B1D4974DA00F848D2 /* GameViewController.swift */,
-				33C1D05D1D4974E100F848D2 /* Hero.sks */,
 				33C1D05F1D4974FE00F848D2 /* Info.plist */,
-				33C1D0601D4974FE00F848D2 /* Int+Extensions.swift */,
-				33C1D0611D4974FE00F848D2 /* Level0.sks */,
-				33C1D0621D4974FE00F848D2 /* Level1.sks */,
-				33C1D0631D4974FE00F848D2 /* MainScene.sks */,
-				33C1D0641D4974FE00F848D2 /* MainScene.swift */,
-				33C1D0651D4974FE00F848D2 /* MSButtonNode.swift */,
-				33C1D0661D4974FE00F848D2 /* MSToggleNode.swift */,
-				33C1D0671D4974FE00F848D2 /* SettingsScene.sks */,
-				33C1D0681D4974FE00F848D2 /* SettingsScene.swift */,
-				33C1D0691D4974FE00F848D2 /* SKAction+Extensions.swift */,
-				33C1D06A1D4974FE00F848D2 /* SKAction+SpecialEffects.swift */,
-				33C1D06B1D4974FE00F848D2 /* SKColor+Extensions.swift */,
-				33C1D06C1D4974FE00F848D2 /* SKNode+Extensions.swift */,
-				33C1D06D1D4974FE00F848D2 /* SKTAudio.swift */,
-				33C1D06E1D4974FE00F848D2 /* SKTEffects.swift */,
-				33C1D06F1D4974FE00F848D2 /* SKTTimingFunctions.swift */,
+				33CAFC871D4A6DBC00C041B9 /* Levels */,
 				33C1D0701D4974FE00F848D2 /* spark.png */,
-				33C1D0711D4974FE00F848D2 /* Vector3.swift */,
 				33D510AD1D49736600F222F5 /* Main.storyboard */,
 				33D510B01D49736600F222F5 /* Assets.xcassets */,
 				33D510B21D49736600F222F5 /* LaunchScreen.storyboard */,
@@ -312,13 +356,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				33C1D0721D4974FE00F848D2 /* Info.plist in Resources */,
-				33C1D0551D4974B200F848D2 /* Enemy.sks in Resources */,
 				33D510B41D49736600F222F5 /* LaunchScreen.storyboard in Resources */,
 				33C1D07A1D4974FE00F848D2 /* SettingsScene.sks in Resources */,
 				33D510B11D49736600F222F5 /* Assets.xcassets in Resources */,
+				33CAFC841D4A6D0D00C041B9 /* Enemy.sks in Resources */,
+				33CAFC8D1D4A924800C041B9 /* Level4.sks in Resources */,
+				3390306E1D4AB892006894C9 /* Level5.sks in Resources */,
+				33CAFC891D4A6E8600C041B9 /* Level2.sks in Resources */,
 				33C1D0831D4974FE00F848D2 /* spark.png in Resources */,
 				33C1D0751D4974FE00F848D2 /* Level1.sks in Resources */,
 				33C1D05E1D4974E100F848D2 /* Hero.sks in Resources */,
+				33CAFC8B1D4A7CEE00C041B9 /* Level3.sks in Resources */,
 				33C1D0761D4974FE00F848D2 /* MainScene.sks in Resources */,
 				33C1D0511D4974B200F848D2 /* BlackSun.sks in Resources */,
 				33C1D0741D4974FE00F848D2 /* Level0.sks in Resources */,
