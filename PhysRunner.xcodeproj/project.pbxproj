@@ -75,7 +75,7 @@
 		33595B3D1D4BBE4200232DA4 /* Level 6.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level 6.sks"; sourceTree = "<group>"; };
 		33595B3F1D4BBEB000232DA4 /* GroundBlock.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GroundBlock.sks; sourceTree = "<group>"; };
 		3390306D1D4AB892006894C9 /* Level 5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level 5.sks"; sourceTree = "<group>"; };
-		33AA8FF31D4FEE8600F50EB1 /* Level 8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = "Level 8.sks"; path = "../Level 8.sks"; sourceTree = "<group>"; };
+		33AA8FF31D4FEE8600F50EB1 /* Level 8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level 8.sks"; sourceTree = "<group>"; };
 		33B65D571D4C00F7001BCFBC /* Level 7.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level 7.sks"; sourceTree = "<group>"; };
 		33C1D04B1D4974B200F848D2 /* BlackSun.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BlackSun.sks; sourceTree = "<group>"; };
 		33C1D04C1D4974B200F848D2 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 		33C1D06F1D4974FE00F848D2 /* SKTTimingFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTTimingFunctions.swift; sourceTree = "<group>"; };
 		33C1D0701D4974FE00F848D2 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		33C1D0711D4974FE00F848D2 /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
-		33CAFC831D4A6D0D00C041B9 /* Enemy.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Enemy.sks; path = ../Enemy.sks; sourceTree = "<group>"; };
+		33CAFC831D4A6D0D00C041B9 /* Enemy.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Enemy.sks; sourceTree = "<group>"; };
 		33CAFC881D4A6E8600C041B9 /* Level 2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level 2.sks"; sourceTree = "<group>"; };
 		33CAFC8A1D4A7CEE00C041B9 /* Level 3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level 3.sks"; sourceTree = "<group>"; };
 		33CAFC8C1D4A924800C041B9 /* Level 4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level 4.sks"; sourceTree = "<group>"; };
