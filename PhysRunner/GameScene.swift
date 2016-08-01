@@ -24,11 +24,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var levelNode: SKNode!
     
-    var gameLevel = 5
+    var gameLevel = 0
+    
+    
+    
+    var sceneHeight: CGFloat!
+    
+    var sceneWidth: CGFloat!
     
     var goal: SKEmitterNode!
     
-    var charges: [(Int, Int, Int)] = [(0,0,0), (0,100,0), (5,10,0), (10,10,10), (10,10,10), (7, 7 , 7)]
+    var charges: [(Int, Int, Int)] = [(0,0,0), (0,100,0), (50,30,0), (20,20,20), (10,10,10), (7, 7 , 7), (15, 15, 15)]
     
     var cameraTarget: SKNode?
     
@@ -125,6 +131,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var nextLevelButton: MSButtonNode!
     
+    var levelMenuButtonGO: MSButtonNode!
+    
+    var levelMenuButtonYW: MSButtonNode!
+    
     
     override func didMoveToView(view: SKView) {
         
@@ -132,10 +142,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         physicsWorld.contactDelegate = self
         
+//        view.showsPhysics = false
+        
+        
         /* Load the level */
-        var resourcePath = NSBundle.mainBundle().pathForResource("Level" + "\(gameLevel)", ofType: ".sks")
+        var resourcePath = NSBundle.mainBundle().pathForResource("Level " + "\(gameLevel)", ofType: ".sks")
         let newLevel = SKReferenceNode (URL: NSURL (fileURLWithPath: resourcePath!))
         levelNode.addChild(newLevel)
+        sceneHeight = newLevel.calculateAccumulatedFrame().height
+        sceneWidth = newLevel.calculateAccumulatedFrame().width
+//        print("HAVE U SCENE ME h: \(sceneHeight) w: \(sceneWidth)")
         
         for child in newLevel.children.first!.children {
             if (child.name == "enemy") {
@@ -256,7 +272,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.hero.xScale = -self.hero.xScale
                 self.hero.physicsBody?.velocity = CGVectorMake(0, 0)
             }
-            self.hero.physicsBody?.applyImpulse(CGVectorMake(10, 0))
+            self.hero.physicsBody?.applyImpulse(CGVectorMake(15, 0))
         }
         
         moveLeftButton = camera!.childNodeWithName("moveLeftButton") as! MSButtonNode
@@ -265,7 +281,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.hero.xScale = -self.hero.xScale
                 self.hero.physicsBody?.velocity = CGVectorMake(0, 0)
             }
-            self.hero.physicsBody?.applyImpulse(CGVectorMake(-10, 0))
+            self.hero.physicsBody?.applyImpulse(CGVectorMake(-15, 0))
         }
         
         optionsTab = camera!.childNodeWithName("optionsTab") as! MSButtonNode
@@ -311,7 +327,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if (self.gamePaused) {
                 self.hero.paused = !self.hero.paused
                 self.hero.physicsBody?.velocity = self.storedVelocity
-                print(self.enemy[0].children[0])
                 self.physicsWorld.speed = 1
             }
             else {
@@ -345,9 +360,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         levelDisplay = infoBar.childNodeWithName("levelDisplay") as! SKLabelNode
+        levelDisplay.text = "Level " + "\(gameLevel)"
         linearCharges = infoBar.childNodeWithName("linearCharges") as! SKLabelNode
+        linearCharges.text = "\(charges[gameLevel].1)" + "x"
         radialCharges = infoBar.childNodeWithName("radialCharges") as! SKLabelNode
+        radialCharges.text = "\(charges[gameLevel].2)" + "x"
         velocityCharges = infoBar.childNodeWithName("velocityCharges") as! SKLabelNode
+        velocityCharges.text = "\(charges[gameLevel].0)" + "x"
         
         gameOverScreen = self.childNodeWithName("gameOverScreen") as! SKSpriteNode
         
@@ -419,6 +438,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.gameLevel++
             let scene = GameScene(fileNamed: "GameScene") as GameScene!
             scene.gameLevel = self.gameLevel
+            scene.scaleMode = .AspectFill
+            skView.presentScene(scene)
+        }
+        
+        
+        levelMenuButtonGO = gameOverScreen.childNodeWithName("levelMenuButtonGO") as! MSButtonNode
+        levelMenuButtonGO.selectedHandler = {
+            let skView = self.view as SKView!
+            let scene = LevelMenuScene(fileNamed: "LevelMenuScene") as LevelMenuScene!
+            scene.scaleMode = .AspectFill
+            skView.presentScene(scene)
+        }
+        
+        levelMenuButtonYW = youWonScreen.childNodeWithName("levelMenuButtonYW") as! MSButtonNode
+        levelMenuButtonYW.selectedHandler = {
+            let skView = self.view as SKView!
+            let scene = LevelMenuScene(fileNamed: "LevelMenuScene") as LevelMenuScene!
             scene.scaleMode = .AspectFill
             skView.presentScene(scene)
         }
@@ -524,16 +560,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (gamePaused || gameState == .GameOver) { return }
         
         
-        if (hero.position.x < 0 || hero.position.y < -300 || hero.position.x > 1568) {
+        if (hero.position.x < -50 || hero.position.y < -300 || hero.position.x > 1568) {
             heroDies(hero)
         }
+        
+        
+        velocityCharges.text = "\(charges[gameLevel].0)" + "x"
+        linearCharges.text = "\(charges[gameLevel].1)" + "x"
+        radialCharges.text = "\(charges[gameLevel].2)" + "x"
         
         
         let goalPos = levelNode.convertPoint(goal.position, toNode: self)
         let heroPos = hero.parent!.convertPoint(hero.position, toNode: self)
         if ( heroPos.x >= goalPos.x ) {
             print(heroPos.x >= goalPos.x)
-            let moveY = SKAction.moveToY(200, duration: 0.6)
+            let moveY = SKAction.moveToY((self.camera?.position.y)!, duration: 0.6)
             let moveX = SKAction.moveToX((self.camera?.position.x)!, duration: 0.6)
             let seq = SKAction.sequence([moveX, moveY])
             youWonScreen.runAction(seq)
@@ -595,16 +636,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             lastTime = currentTime
         }
         
+        let heroPosition = hero.parent!.parent!.convertPoint(hero.position, toNode: self)
+        
         cameraTarget = hero
 
         /* Check we have a valid camera target to follow */
         if let cameraTarget = cameraTarget {
             
             /* Set camera position to follow target horizontally, keep vertical locked */
-            camera?.position = CGPoint(x:cameraTarget.position.x + 283, y:camera!.position.y)
+            if (hero.xScale > 0) {
+                camera?.position = CGPoint(x: heroPosition.x + 203, y: heroPosition.y)
+            }
+            else {
+                camera?.position = CGPoint(x: heroPosition.x - 182, y: heroPosition.y)
+            }
         }
+        
         /* Clamp camera scrolling to our visible scene area only */
         camera?.position.x.clamp(283, 1285)
+        camera?.position.y.clamp(160 , sceneHeight - 160)
+//        print("x: \(CGFloat((camera?.position.x)!)) heroX: \(hero.position.x)")
+//        print("y: \(CGFloat((camera?.position.y)!)) heroY: \(hero.position.y)")
+        
     }
     
     
@@ -695,7 +748,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.runAction(heroDeath)
         
-        let moveUp = SKAction.moveToY(200, duration: 0.6)
+        let moveUp = SKAction.moveToY((self.camera?.position.y)!, duration: 0.6)
         
         let moveToX = SKAction.moveToX((self.camera?.position.x)!, duration: 0.6)
         
@@ -722,8 +775,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         
-        let nodeA = contactA.node as! SKSpriteNode
-        let nodeB = contactB.node as! SKSpriteNode
+        let nodeA = contactA.node!
+        let nodeB = contactB.node!
         
         
         
