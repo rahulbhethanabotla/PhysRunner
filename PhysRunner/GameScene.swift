@@ -24,7 +24,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var levelNode: SKNode!
     
-    var gameLevel = 0
+    var gameLevel = 8
     
     
     
@@ -34,7 +34,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var goal: SKEmitterNode!
     
-    var charges: [(Int, Int, Int)] = [(0,0,0), (0,100,0), (50,30,0), (20,20,20), (10,10,10), (7, 7 , 7), (15, 15, 15)]
+    var charges: [(Int, Int, Int)] = [(0,0,0), (0,100,0), (50,30,0), (20,20,20), (10,10,10), (7, 7 , 7), (15, 15, 15), (20,20,20), (17, 30, 10)]
     
     var cameraTarget: SKNode?
     
@@ -623,11 +623,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     fireball.physicsBody?.categoryBitMask = 2
                     fireball.physicsBody?.contactTestBitMask = 5
                     fireball.physicsBody?.collisionBitMask = 0
+                if (en.parent?.parent!.xScale > 0) {
                     fireball.position.x = en.position.x - 50
+                }
+                else {
+                    fireball.position.x = en.position.x - 50
+                  
+                }
                     fireball.position.y = en.position.y - 10
                     fireball.zPosition = 4
                     en.addChild(fireball)
+                if (en.parent!.parent!.xScale > 0) {
                     fireball.physicsBody?.applyImpulse(CGVectorMake(-2, 0))
+                }
+                else {
+                    fireball.xScale * -1
+                    fireball.physicsBody?.applyImpulse(CGVectorMake(2, 0))
+                }
 
                 
 //                en.shootProjectile()

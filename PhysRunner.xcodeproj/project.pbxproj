@@ -10,7 +10,8 @@
 		33595B3E1D4BBE4200232DA4 /* Level 6.sks in Resources */ = {isa = PBXBuildFile; fileRef = 33595B3D1D4BBE4200232DA4 /* Level 6.sks */; };
 		33595B401D4BBEB000232DA4 /* GroundBlock.sks in Resources */ = {isa = PBXBuildFile; fileRef = 33595B3F1D4BBEB000232DA4 /* GroundBlock.sks */; };
 		3390306E1D4AB892006894C9 /* Level 5.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3390306D1D4AB892006894C9 /* Level 5.sks */; };
-		33B65D581D4C00F7001BCFBC /* spaghetti.sks in Resources */ = {isa = PBXBuildFile; fileRef = 33B65D571D4C00F7001BCFBC /* spaghetti.sks */; };
+		33AA8FF41D4FEE8600F50EB1 /* Level 8.sks in Resources */ = {isa = PBXBuildFile; fileRef = 33AA8FF31D4FEE8600F50EB1 /* Level 8.sks */; };
+		33B65D581D4C00F7001BCFBC /* Level 7.sks in Resources */ = {isa = PBXBuildFile; fileRef = 33B65D571D4C00F7001BCFBC /* Level 7.sks */; };
 		33C1D0511D4974B200F848D2 /* BlackSun.sks in Resources */ = {isa = PBXBuildFile; fileRef = 33C1D04B1D4974B200F848D2 /* BlackSun.sks */; };
 		33C1D0521D4974B200F848D2 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C1D04C1D4974B200F848D2 /* CGFloat+Extensions.swift */; };
 		33C1D0531D4974B200F848D2 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C1D04D1D4974B200F848D2 /* CGPoint+Extensions.swift */; };
@@ -74,7 +75,8 @@
 		33595B3D1D4BBE4200232DA4 /* Level 6.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level 6.sks"; sourceTree = "<group>"; };
 		33595B3F1D4BBEB000232DA4 /* GroundBlock.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GroundBlock.sks; sourceTree = "<group>"; };
 		3390306D1D4AB892006894C9 /* Level 5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level 5.sks"; sourceTree = "<group>"; };
-		33B65D571D4C00F7001BCFBC /* spaghetti.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = spaghetti.sks; sourceTree = "<group>"; };
+		33AA8FF31D4FEE8600F50EB1 /* Level 8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = "Level 8.sks"; path = "../Level 8.sks"; sourceTree = "<group>"; };
+		33B65D571D4C00F7001BCFBC /* Level 7.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Level 7.sks"; sourceTree = "<group>"; };
 		33C1D04B1D4974B200F848D2 /* BlackSun.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BlackSun.sks; sourceTree = "<group>"; };
 		33C1D04C1D4974B200F848D2 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		33C1D04D1D4974B200F848D2 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
@@ -205,7 +207,8 @@
 				33CAFC8C1D4A924800C041B9 /* Level 4.sks */,
 				3390306D1D4AB892006894C9 /* Level 5.sks */,
 				33595B3D1D4BBE4200232DA4 /* Level 6.sks */,
-				33B65D571D4C00F7001BCFBC /* spaghetti.sks */,
+				33B65D571D4C00F7001BCFBC /* Level 7.sks */,
+				33AA8FF31D4FEE8600F50EB1 /* Level 8.sks */,
 			);
 			name = Levels;
 			sourceTree = "<group>";
@@ -372,7 +375,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33C1D0721D4974FE00F848D2 /* Info.plist in Resources */,
-				33B65D581D4C00F7001BCFBC /* spaghetti.sks in Resources */,
+				33B65D581D4C00F7001BCFBC /* Level 7.sks in Resources */,
 				33D510B41D49736600F222F5 /* LaunchScreen.storyboard in Resources */,
 				33C1D07A1D4974FE00F848D2 /* SettingsScene.sks in Resources */,
 				33D510B11D49736600F222F5 /* Assets.xcassets in Resources */,
@@ -389,6 +392,7 @@
 				33595B3E1D4BBE4200232DA4 /* Level 6.sks in Resources */,
 				33C1D0761D4974FE00F848D2 /* MainScene.sks in Resources */,
 				33C1D0511D4974B200F848D2 /* BlackSun.sks in Resources */,
+				33AA8FF41D4FEE8600F50EB1 /* Level 8.sks in Resources */,
 				33C1D0741D4974FE00F848D2 /* Level 0.sks in Resources */,
 				33C1D0591D4974CA00F848D2 /* GameScene.sks in Resources */,
 				33D510AF1D49736600F222F5 /* Main.storyboard in Resources */,
