@@ -9,14 +9,17 @@
 import SpriteKit
 import CoreGraphics
 import UIKit
+import Mixpanel
 
 
 
-enum GameState {
+enum GameState  {
     case Active, GameOver
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+
+    
     
     let pi = M_PI
     
@@ -24,9 +27,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var levelNode: SKNode!
     
-    var gameLevel = 8
+    var gameLevel = 0
     
-    
+    var savedLevel = NSUserDefaults.standardUserDefaults().integerForKey("farthestGameLevel")
     
     var sceneHeight: CGFloat!
     
@@ -34,7 +37,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var goal: SKEmitterNode!
     
-    var charges: [(Int, Int, Int)] = [(0,0,0), (0,100,0), (50,30,0), (20,20,20), (10,10,10), (7, 7 , 7), (15, 15, 15), (20,20,20), (17, 30, 10)]
+    var charges: [(Int, Int, Int)] = [(0,0,0), (0,100,0), (50,30,0), (20,20,20), (10,10,10), (7, 7 , 7), (15, 15, 15), (20,20,20), (1, 1, 1)]
     
     var cameraTarget: SKNode?
     
@@ -137,6 +140,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func didMoveToView(view: SKView) {
+    
+//        let mixpanel = Mixpanel.sharedInstanceWithToken(token)
         
         levelNode = self.childNodeWithName("levelNode")
         
@@ -436,6 +441,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.gameState = .Active
             let skView = self.view as SKView!
             self.gameLevel++
+            
+            /* update the farthestGameLevel */
+            if (self.gameLevel > NSUserDefaults.standardUserDefaults().integerForKey("farthestGameLevel")) {
+                NSUserDefaults.standardUserDefaults().setInteger(self.gameLevel, forKey: "farthestGameLevel")
+            }
             let scene = GameScene(fileNamed: "GameScene") as GameScene!
             scene.gameLevel = self.gameLevel
             scene.scaleMode = .AspectFill
@@ -579,6 +589,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let seq = SKAction.sequence([moveX, moveY])
             youWonScreen.runAction(seq)
             gameState = .GameOver
+            
+            Mixpanel.sharedInstance().track("Level Cleared", properties: ["Level Number": "\(gameLevel)"])
         }
         
         
@@ -769,6 +781,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameOverScreen.runAction(seq)
         
         gameState = .GameOver
+        
+        Mixpanel.sharedInstance().track("Level Failed", properties: ["Level Number": "\(gameLevel)"])
+        
         
     }
     

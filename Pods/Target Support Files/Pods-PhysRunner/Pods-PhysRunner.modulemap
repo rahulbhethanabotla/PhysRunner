@@ -1,0 +1,6 @@
+framework module Pods_PhysRunner {
+  umbrella header "Pods-PhysRunner-umbrella.h"
+
+  export *
+  module * { export * }
+}

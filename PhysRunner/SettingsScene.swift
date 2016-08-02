@@ -13,14 +13,12 @@ class SettingsScene: SKScene {
     
     
     /* UI Connections */
-    var onToggle: MSToggleNode!
-    var offToggle: MSToggleNode!
     var backButton: MSButtonNode!
+    
+    var resetProgressButton: MSButtonNode!
     
     
     override func didMoveToView(view: SKView) {
-        onToggle = self.childNodeWithName("onToggle") as! MSToggleNode
-        offToggle = self.childNodeWithName("offToggle") as! MSToggleNode
         
         
         
@@ -45,5 +43,14 @@ class SettingsScene: SKScene {
             /* Start game scene */
             skView.presentScene(scene)
         }
+        
+        
+        resetProgressButton = self.childNodeWithName("resetProgressButton") as! MSButtonNode
+        resetProgressButton.selectedHandler = {
+            NSUserDefaults.standardUserDefaults().setInteger(0, forKey: "farthestGameLevel")
+        }
     }
+    
+    
+    
 }

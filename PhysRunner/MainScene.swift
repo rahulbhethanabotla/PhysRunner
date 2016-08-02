@@ -17,17 +17,22 @@ class MainScene: SKScene {
     
     var settingsButton: MSButtonNode!
     
+    var titleLabel: SKLabelNode!
+    
     
     override func didMoveToView(view: SKView) {
         playButton = self.childNodeWithName("playButton") as! MSButtonNode
         settingsButton = self.childNodeWithName("settingsButton") as! MSButtonNode
+        
         
         playButton.selectedHandler = {
             /* Grab reference to our SpriteKit view */
             let skView = self.view as SKView!
             
             /* Load Game scene */
+            
             let scene = GameScene(fileNamed:"GameScene") as GameScene!
+            scene.gameLevel = NSUserDefaults.standardUserDefaults().integerForKey("farthestGameLevel")
             
             /* Ensure correct aspect mode */
             scene.scaleMode = .AspectFit
@@ -54,13 +59,16 @@ class MainScene: SKScene {
             scene.scaleMode = .AspectFit
             
             /* Show debug */
-            skView.showsPhysics = true
+            skView.showsPhysics = false
             skView.showsDrawCount = true
-            skView.showsFPS = true
+            skView.showsFPS = false
             
             /* Start game scene */
             skView.presentScene(scene)
         }
+        
+//        titleLabel.fontName = "Phosphate"
+//        titleLabel.fontSize = 96
     }
     
 }
