@@ -618,7 +618,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             Mixpanel.sharedInstance().track("Level Cleared", properties: ["Level Number": "\(gameLevel)"])
         }
         
-        
+        /* setting the tutorial helpers */
         if (gameLevel == 0) {
             var changeColor = SKAction.colorizeWithColor(UIColor.greenColor(), colorBlendFactor: 0.4, duration: 3.0)
             var changeBack = SKAction.colorizeWithColor(UIColor.whiteColor(), colorBlendFactor: 0.4, duration: 3.0)
@@ -633,6 +633,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             var seq = SKAction.sequence([changeColor, changeBack])
             physicsTab.runAction(seq)
             linearGravityButton.runAction(seq)
+        }
+        
+        if (gameLevel == 2) {
+            var changeColor = SKAction.colorizeWithColor(UIColor.greenColor(), colorBlendFactor: 0.4, duration: 3.0)
+            var changeBack = SKAction.colorizeWithColor(UIColor.whiteColor(), colorBlendFactor: 0.4, duration: 3.0)
+            var seq = SKAction.sequence([changeColor, changeBack])
+            velocityVectorButton.runAction(seq)
+        }
+        
+        if (gameLevel == 3) {
+            var changeColor = SKAction.colorizeWithColor(UIColor.greenColor(), colorBlendFactor: 0.4, duration: 3.0)
+            var changeBack = SKAction.colorizeWithColor(UIColor.whiteColor(), colorBlendFactor: 0.4, duration: 3.0)
+            var seq = SKAction.sequence([changeColor, changeBack])
+            radialGravityButton.runAction(seq)
         }
         
         
@@ -659,6 +673,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //
         
         
+        
+        /* runs through all the enemies and make them fire */
         let ticker = currentTime - lastTime
         if (ticker > 10) {
             for en in enemy {
@@ -701,6 +717,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             lastTime = currentTime
         }
         
+        
+        
+        /* Camera and screen boundary settings */
         let heroPosition = hero.parent!.parent!.convertPoint(hero.position, toNode: self)
         
         cameraTarget = hero
@@ -734,7 +753,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     
-    
+    /* creates a radial gravity node at the point */
     func createRadialGravityNode(point: CGPoint) {
         let rGrav = SKFieldNode.radialGravityField()
         rGrav.enabled = true
@@ -752,6 +771,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         fieldRadius.alpha = 0.2
     }
     
+    
+    /* creates a linear gravity node at the point */
     func createLinearGravityNode(point: CGPoint) {
         let gravityVector: vector_float3 = [0, -1, 0]
         let lGrav = SKFieldNode.linearGravityFieldWithVector(gravityVector)
@@ -764,11 +785,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lGrav.addChild(fieldRadius)
         fieldRadius.zPosition = -2
         fieldRadius.position = CGPointMake(0, 0)
-        fieldRadius.size = CGSizeMake(100, 100)
+        fieldRadius.size = CGSizeMake(150, 150)
         fieldRadius.alpha = 0.2
         lGrav.region = SKRegion(radius: Float(fieldRadius.size.height))
     }
     
+    
+    /* creates a linear velocity field at the point */
     func createVelocityFieldNode(point: CGPoint) {
         /* Create the actual physics field node */
         let velocityVector: vector_float3 = [Float(nextVector.dx * 0.3), Float(nextVector.dy * 0.3), 0]
