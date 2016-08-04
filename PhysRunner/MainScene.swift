@@ -19,10 +19,24 @@ class MainScene: SKScene {
     
     var titleLabel: SKLabelNode!
     
+    var levelMenuButton: MSButtonNode!
+    
     
     override func didMoveToView(view: SKView) {
         playButton = self.childNodeWithName("playButton") as! MSButtonNode
         settingsButton = self.childNodeWithName("settingsButton") as! MSButtonNode
+        levelMenuButton = self.childNodeWithName("levelMenuButton") as! MSButtonNode
+        
+        
+        levelMenuButton.selectedHandler = {
+            let skView = self.view as SKView!
+            
+            let scene = LevelMenuScene(fileNamed: "LevelMenuScene") as LevelMenuScene!
+            
+            scene.scaleMode = .AspectFit
+            
+            skView.presentScene(scene)
+        }
         
         
         playButton.selectedHandler = {
@@ -38,9 +52,9 @@ class MainScene: SKScene {
             scene.scaleMode = .AspectFit
             
             /* Show debug */
-            skView.showsPhysics = true
-            skView.showsDrawCount = true
-            skView.showsFPS = true
+            skView.showsPhysics = false
+            skView.showsDrawCount = false
+            skView.showsFPS = false
             
             /* Start game scene */
             skView.presentScene(scene)

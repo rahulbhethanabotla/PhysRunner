@@ -18,7 +18,7 @@ enum GameState  {
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-
+    
     
     
     let pi = M_PI
@@ -140,14 +140,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func didMoveToView(view: SKView) {
-    
-//        let mixpanel = Mixpanel.sharedInstanceWithToken(token)
+        
+        //        let mixpanel = Mixpanel.sharedInstanceWithToken(token)
         
         levelNode = self.childNodeWithName("levelNode")
         
         physicsWorld.contactDelegate = self
         
-//        view.showsPhysics = false
+        //        view.showsPhysics = false
         
         
         /* Load the level */
@@ -156,12 +156,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         levelNode.addChild(newLevel)
         sceneHeight = newLevel.calculateAccumulatedFrame().height
         sceneWidth = newLevel.calculateAccumulatedFrame().width
-//        print("HAVE U SCENE ME h: \(sceneHeight) w: \(sceneWidth)")
+        //        print("HAVE U SCENE ME h: \(sceneHeight) w: \(sceneWidth)")
         
         for child in newLevel.children.first!.children {
             if (child.name == "enemy") {
                 enemy.append(child.children.first!.children.first as! Enemy)
-
+                
             }
         }
         
@@ -171,18 +171,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         hero = self.childNodeWithName("//hero") as! SKSpriteNode
         
         /* Setup the background image */
-//        background = self.childNodeWithName("background") as! SKSpriteNode
-//        background.size = self.size
-//        background.zPosition = -5
-//        background.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2)
+        //        background = self.childNodeWithName("background") as! SKSpriteNode
+        //        background.size = self.size
+        //        background.zPosition = -5
+        //        background.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2)
         
         
-        /* Setup the blackSun image and starting position */
-        
-        blackSun = self.childNodeWithName("blackSun") as! SKSpriteNode
-        blackSun.position = CGPointMake(0, 0)
-        blackSun.zPosition = -2
-        
+        //        /* Setup the blackSun image and starting position */
+        //
+        //        blackSun = self.childNodeWithName("blackSun") as! SKSpriteNode
+        //        blackSun.position = CGPointMake(0, 0)
+        //        blackSun.zPosition = -2
+        //
         
         /* Setup the background lighting/ambience */
         
@@ -224,9 +224,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (gameLevel < 3) {
             radialGravityButton.hidden = true
         }
+        //        if (!self.wasLinearPressed && !self.wasVelocityPressed) {
         radialGravityButton.selectedHandler = {
-            
             if (!self.wasRadialPressed) {
+                self.unspaghetti()
                 self.radialGravityButton.alpha = 0.4
             }
             else {
@@ -234,14 +235,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             self.wasRadialPressed = !self.wasRadialPressed
         }
+        //        }
         
         velocityVectorButton = physicsBar.childNodeWithName("velocityVectorButton") as! MSToggleNode
         if (gameLevel < 2) {
             velocityVectorButton.hidden = true
         }
+        
+        //        if (!self.wasRadialPressed && !self.wasLinearPressed) {
         velocityVectorButton.selectedHandler = {
-            
             if (!self.wasVelocityPressed) {
+                /* Unspaghetti resets all the values of the buttons */
+                self.unspaghetti()
                 self.velocityVectorButton.alpha = 0.4
             }
             else {
@@ -250,16 +255,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             print("click")
             self.wasVelocityPressed = !self.wasVelocityPressed
         }
+        //        }
         
         
         linearGravityButton = physicsBar.childNodeWithName("linearGravityButton") as! MSToggleNode
         if (gameLevel < 1) {
             linearGravityButton.hidden = true
         }
+        
+        //        if (!self.wasRadialPressed && !self.wasVelocityPressed) {
         linearGravityButton.selectedHandler = {
-            
             if (!self.wasLinearPressed) {
+                self.unspaghetti()
                 self.linearGravityButton.alpha = 0.4
+                
                 print("linear pressed")
             }
             else {
@@ -269,7 +278,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.wasLinearPressed = !self.wasLinearPressed
         }
         
-        
+        //        }
         
         moveRightButton = camera!.childNodeWithName("moveRightButton") as! MSButtonNode
         moveRightButton.selectedHandler = {
@@ -323,7 +332,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         
-       
+        
         
         pauseButton = optionsBar.childNodeWithName("pauseButton") as! MSButtonNode
         pauseButton.selectedHandler = {
@@ -350,17 +359,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         infoButton = optionsBar.childNodeWithName("infoButton") as! MSButtonNode
         infoBar = self.childNodeWithName("infoBar") as! SKSpriteNode
+        
+        /* info bar actions to show level info */
+        let moveDown = SKAction.moveToY(((self.camera?.position.y)! + 100), duration: 1.0)
+        let moveToX = SKAction.moveToX((self.camera?.position.x)!, duration: 1.0)
+        let goUp = SKAction.moveToY(1000, duration: 1.0)
+        let wait = SKAction.waitForDuration(1.5)
+        let sequence = SKAction.sequence([moveToX, moveDown, wait, goUp])
+        self.infoBar.runAction(sequence)
+        
         infoButton.selectedHandler = {
-            let moveDown = SKAction.moveToY(250, duration: 0.6)
+            let moveDown = SKAction.moveToY((self.camera?.position.y)!, duration: 0.6)
             let moveToX = SKAction.moveToX((self.camera?.position.x)!, duration: 0.6)
             let seq = SKAction.sequence([moveToX,moveDown])
             let goUp = SKAction.moveToY(500, duration: 0.6)
             if (self.isInfoDown) { self.infoBar.runAction(goUp) }
             else { self.infoBar.runAction(seq) }
             self.isInfoDown = !self.isInfoDown
-            
-                
-            
         }
         
         
@@ -407,7 +422,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             /* Start game scene */
             skView.presentScene(scene)
         }
-
+        
         
         youWonScreen = self.childNodeWithName("youWonScreen") as! SKSpriteNode
         
@@ -430,11 +445,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             /* Start game scene */
             skView.presentScene(scene)
         }
-
         
         
         
-       
+        
+        
         
         nextLevelButton = youWonScreen.childNodeWithName("nextLevelButton") as! MSButtonNode
         nextLevelButton.selectedHandler = {
@@ -450,6 +465,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scene.gameLevel = self.gameLevel
             scene.scaleMode = .AspectFill
             skView.presentScene(scene)
+            
         }
         
         
@@ -472,6 +488,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    func unspaghetti() {
+        self.wasRadialPressed = false
+        self.wasLinearPressed = false
+        self.wasVelocityPressed = false
+        self.radialGravityButton.alpha = 1
+        self.linearGravityButton.alpha = 1
+        self.velocityVectorButton.alpha = 1
+    }
+    
     
     
     
@@ -491,7 +516,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             start = location
             startTime = touch.timestamp
             
-            if (wasRadialPressed && charges[gameLevel].2 > 0) {
+            if (wasRadialPressed && charges[gameLevel].2 > 0 && !wasVelocityPressed && !wasLinearPressed) {
                 for child in self.children {
                     if let _ = child as? SKFieldNode {
                         child.removeFromParent()
@@ -501,7 +526,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 charges[gameLevel].2 -= 1
             }
             
-            if (wasLinearPressed && charges[gameLevel].1 > 0) {
+            if (wasLinearPressed && charges[gameLevel].1 > 0 && !wasRadialPressed && !wasVelocityPressed) {
                 for child in self.children {
                     if let _ = child as? SKFieldNode {
                         child.removeFromParent()
@@ -545,7 +570,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         dy = dy / magnitude
                         print("Swipe detected with speed = \(speed) and direction (\(dx), \(dy))")
                         nextVector = CGVectorMake(dx, dy)
-                        if (wasVelocityPressed && charges[gameLevel].0 > 0) {
+                        if (wasVelocityPressed && charges[gameLevel].0 > 0 && !wasRadialPressed && !wasLinearPressed) {
                             for child in self.children {
                                 if let _ = child as? SKFieldNode {
                                     child.removeFromParent()
@@ -594,57 +619,73 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         
+        if (gameLevel == 0) {
+            var changeColor = SKAction.colorizeWithColor(UIColor.greenColor(), colorBlendFactor: 0.4, duration: 3.0)
+            var changeBack = SKAction.colorizeWithColor(UIColor.whiteColor(), colorBlendFactor: 0.4, duration: 3.0)
+            var seq = SKAction.sequence([changeColor, changeBack])
+            moveRightButton.runAction(seq)
+            moveLeftButton.runAction(seq)
+        }
+        
+        if (gameLevel == 1) {
+            var changeColor = SKAction.colorizeWithColor(UIColor.greenColor(), colorBlendFactor: 0.4, duration: 3.0)
+            var changeBack = SKAction.colorizeWithColor(UIColor.whiteColor(), colorBlendFactor: 0.4, duration: 3.0)
+            var seq = SKAction.sequence([changeColor, changeBack])
+            physicsTab.runAction(seq)
+            linearGravityButton.runAction(seq)
+        }
+        
         
         /* Called before each frame is rendered */
-        if (abs(blackSun.position.y - 320) <= 0.1) {
-            sunAtApex = true
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        if (sunAtApex == false){
-            blackSun.position = CGPointMake(blackSun.position.x + 1, blackSun.position.y + (320/284))
-            //print("x = \(blackSun.position.x)")
-            //print("y = \(blackSun.position.y)")
-        }
-        else {
-            blackSun.position = CGPointMake(blackSun.position.x + 1, blackSun.position.y - (320/284))
-        }
-        
+        //        if (abs(blackSun.position.y - 320) <= 0.1) {
+        //            sunAtApex = true
+        //        }
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //        if (sunAtApex == false){
+        //            blackSun.position = CGPointMake(blackSun.position.x + 1, blackSun.position.y + (320/284))
+        //            //print("x = \(blackSun.position.x)")
+        //            //print("y = \(blackSun.position.y)")
+        //        }
+        //        else {
+        //            blackSun.position = CGPointMake(blackSun.position.x + 1, blackSun.position.y - (320/284))
+        //        }
+        //
         
         
         let ticker = currentTime - lastTime
         if (ticker > 10) {
             for en in enemy {
                 
-                    let fireball = SKSpriteNode(imageNamed: "blackFire")
-                    fireball.size = CGSizeMake(50, 20)
-                    fireball.physicsBody = SKPhysicsBody(texture: fireball.texture!, size: fireball.size)
-                    fireball.name = "fireball"
-                    fireball.physicsBody?.affectedByGravity = false
-                    fireball.physicsBody?.allowsRotation = false
-                    fireball.physicsBody?.linearDamping = 0
-                    fireball.physicsBody?.friction = 0
-                    //                var rotate = SKAction.rotateToAngle(CGFloat(M_PI/2.00), duration: 0)
-                    //                fireball.runAction(rotate)
-                    fireball.physicsBody?.categoryBitMask = 2
-                    fireball.physicsBody?.contactTestBitMask = 5
-                    fireball.physicsBody?.collisionBitMask = 0
+                let fireball = SKSpriteNode(imageNamed: "blackFire")
+                fireball.size = CGSizeMake(50, 20)
+                fireball.physicsBody = SKPhysicsBody(texture: fireball.texture!, size: fireball.size)
+                fireball.name = "fireball"
+                fireball.physicsBody?.affectedByGravity = false
+                fireball.physicsBody?.allowsRotation = false
+                fireball.physicsBody?.linearDamping = 0
+                fireball.physicsBody?.friction = 0
+                //                var rotate = SKAction.rotateToAngle(CGFloat(M_PI/2.00), duration: 0)
+                //                fireball.runAction(rotate)
+                fireball.physicsBody?.categoryBitMask = 2
+                fireball.physicsBody?.contactTestBitMask = 5
+                fireball.physicsBody?.collisionBitMask = 0
                 if (en.parent?.parent!.xScale > 0) {
                     fireball.position.x = en.position.x - 50
                 }
                 else {
                     fireball.position.x = en.position.x - 50
-                  
+                    
                 }
-                    fireball.position.y = en.position.y - 10
-                    fireball.zPosition = 4
-                    en.addChild(fireball)
+                fireball.position.y = en.position.y - 10
+                fireball.zPosition = 4
+                en.addChild(fireball)
                 if (en.parent!.parent!.xScale > 0) {
                     fireball.physicsBody?.applyImpulse(CGVectorMake(-2, 0))
                 }
@@ -652,9 +693,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     fireball.xScale * -1
                     fireball.physicsBody?.applyImpulse(CGVectorMake(2, 0))
                 }
-
                 
-//                en.shootProjectile()
+                
+                //                en.shootProjectile()
             }
             fireballCount++
             lastTime = currentTime
@@ -663,7 +704,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let heroPosition = hero.parent!.parent!.convertPoint(hero.position, toNode: self)
         
         cameraTarget = hero
-
+        
         /* Check we have a valid camera target to follow */
         if let cameraTarget = cameraTarget {
             
@@ -679,8 +720,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         /* Clamp camera scrolling to our visible scene area only */
         camera?.position.x.clamp(283, 1285)
         camera?.position.y.clamp(160 , sceneHeight - 160)
-//        print("x: \(CGFloat((camera?.position.x)!)) heroX: \(hero.position.x)")
-//        print("y: \(CGFloat((camera?.position.y)!)) heroY: \(hero.position.y)")
+        //        print("x: \(CGFloat((camera?.position.x)!)) heroX: \(hero.position.x)")
+        //        print("y: \(CGFloat((camera?.position.y)!)) heroY: \(hero.position.y)")
         
     }
     
@@ -819,7 +860,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 heroDies(nodeB)
                 nodeA.removeFromParent()
             }
-        
+            
             
         }
         
