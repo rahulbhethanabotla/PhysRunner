@@ -74,7 +74,7 @@ class MainScene: SKScene {
             
             /* Show debug */
             skView.showsPhysics = false
-            skView.showsDrawCount = true
+            skView.showsDrawCount = false
             skView.showsFPS = false
             
             /* Start game scene */

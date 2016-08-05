@@ -36,9 +36,9 @@ class SettingsScene: SKScene {
             scene.scaleMode = .AspectFit
             
             /* Show debug */
-            skView.showsPhysics = true
-            skView.showsDrawCount = true
-            skView.showsFPS = true
+            skView.showsPhysics = false
+            skView.showsDrawCount = false
+            skView.showsFPS = false
             
             /* Start game scene */
             skView.presentScene(scene)

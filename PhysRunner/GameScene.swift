@@ -466,6 +466,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scene.scaleMode = .AspectFill
             skView.presentScene(scene)
             
+            skView.showsFPS = false
+            skView.showsPhysics = false
+            skView.showsDrawCount = false
+            
         }
         
         
@@ -787,7 +791,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         fieldRadius.position = CGPointMake(0, 0)
         fieldRadius.size = CGSizeMake(150, 150)
         fieldRadius.alpha = 0.2
-        lGrav.region = SKRegion(radius: Float(fieldRadius.size.height))
+        lGrav.region = SKRegion(radius: Float(fieldRadius.size.height/2))
     }
     
     
