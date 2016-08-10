@@ -164,7 +164,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var isLevelWon: Bool!
     
+    var gameArea = CGRect()
     
+//    override init(size: CGSize) {
+//        
+//        let maxAspectRation: CGFloat = 16.0/9.0
+//        let playableWidth = size.height / maxAspectRation
+//        let gameAreaMargin = (size.width - playableWidth)/2
+//        gameArea = CGRect(x: gameAreaMargin, y: 0, width: playableWidth, height: size.height)
+//        super.init(size: size)
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//    
+//    func random() -> CGFloat {
+//        return CGFloat(Float(arc4random())/0xFFFFFFF)
+//        
+//    }
+//    
+//    func random(min min: CGFloat, max: CGFloat) -> CGFloat {
+//        return random() * (max - min) + min
+//    }
+//    
     override func didMoveToView(view: SKView) {
         
         //        let mixpanel = Mixpanel.sharedInstanceWithToken(token)
@@ -175,15 +198,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //        view.showsPhysics = false
         
-        
         /* Load the level */
         
         let resourcePath = NSBundle.mainBundle().pathForResource("Level " + "\(gameLevel)", ofType: ".sks")
         let newLevel = SKReferenceNode (URL: NSURL (fileURLWithPath: resourcePath!))
         levelNode.addChild(newLevel)
-        sceneHeight = newLevel.calculateAccumulatedFrame().height
-        sceneWidth = newLevel.calculateAccumulatedFrame().width
-        //        print("HAVE U SCENE ME h: \(sceneHeight) w: \(sceneWidth)")
+        
+        
+        
+        self.scene!.scaleMode = SKSceneScaleMode.ResizeFill
+        sceneWidth = newLevel.scene?.size.width
+        sceneHeight = newLevel.scene?.size.width
+                print("HAVE U SCENE ME h: \(sceneHeight) w: \(sceneWidth)")
         
         for child in newLevel.children.first!.children {
             if (child.name == "enemy") {
@@ -210,17 +236,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //        blackSun.position = CGPointMake(0, 0)
         //        blackSun.zPosition = -2
         
-        if (!isSongPlaying) {
-            do {
-                let sound = try AVAudioPlayer(contentsOfURL: soundURL)
-                sound.numberOfLoops = Int(FP_INFINITE)
-                soundPlayer = sound
-                sound.play()
-            }
-            catch {
-                // new meme
-            }
-        }
+//        if (!isSongPlaying) {
+//            do {
+//                let sound = try AVAudioPlayer(contentsOfURL: soundURL)
+//                sound.numberOfLoops = Int(FP_INFINITE)
+//                soundPlayer = sound
+//                sound.play()
+//            }
+//            catch {
+//                // new meme
+//            }
+//        }
         /* Setup the background lighting/ambience */
         
         light = self.childNodeWithName("//light") as! SKLightNode

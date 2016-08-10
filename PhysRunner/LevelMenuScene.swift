@@ -38,7 +38,7 @@ class LevelMenuScene: SKScene {
             let scene = MainScene(fileNamed:"MainScene") as MainScene!
             
             /* Ensure correct aspect mode */
-        //®    scene.scaleMode = .AspectFit
+            scene.scaleMode = .AspectFit
             
             /* Show debug */
             skView.showsPhysics = false

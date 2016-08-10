@@ -28,6 +28,9 @@ class GameViewController: UIViewController {
             scene.scaleMode = .AspectFit
             
             skView.presentScene(scene)
+            
+             var preferredContentSize: CGSize
+            
         }
     }
 
@@ -35,6 +38,8 @@ class GameViewController: UIViewController {
         return true
     }
 
+    
+    
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
             return .AllButUpsideDown

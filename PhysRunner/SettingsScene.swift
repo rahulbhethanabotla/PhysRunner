@@ -36,6 +36,7 @@ class SettingsScene: SKScene {
             
             /* Ensure correct aspect mode */
             scene.scaleMode = .AspectFit
+            //scene.scaleMode = SKSceneScaleMode.ResizeFill
             
             /* Show debug */
             skView.showsPhysics = false
@@ -63,7 +64,7 @@ class SettingsScene: SKScene {
             
             /* Ensure correct aspect mode */
             scene.scaleMode = .AspectFit
-            
+            //scene.scaleMode = SKSceneScaleMode.ResizeFill
             /* Show debug */
             skView.showsPhysics = false
             skView.showsDrawCount = false
