@@ -26,6 +26,7 @@ class MainScene: SKScene {
         playButton = self.childNodeWithName("playButton") as! MSButtonNode
         settingsButton = self.childNodeWithName("settingsButton") as! MSButtonNode
         levelMenuButton = self.childNodeWithName("levelMenuButton") as! MSButtonNode
+        titleLabel = self.childNodeWithName("titleLabel") as! SKLabelNode
         
         
         levelMenuButton.selectedHandler = {
@@ -33,7 +34,7 @@ class MainScene: SKScene {
             
             let scene = LevelMenuScene(fileNamed: "LevelMenuScene") as LevelMenuScene!
             
-            scene.scaleMode = .AspectFit
+          //  scene.scaleMode = .AspectFit
             
             skView.presentScene(scene)
         }
@@ -49,7 +50,7 @@ class MainScene: SKScene {
             scene.gameLevel = NSUserDefaults.standardUserDefaults().integerForKey("farthestGameLevel")
             
             /* Ensure correct aspect mode */
-            scene.scaleMode = .AspectFit
+          //  scene.scaleMode = .AspectFit
             
             /* Show debug */
             skView.showsPhysics = false
@@ -70,7 +71,7 @@ class MainScene: SKScene {
             let scene = SettingsScene(fileNamed:"SettingsScene") as SettingsScene!
             
             /* Ensure correct aspect mode */
-            scene.scaleMode = .AspectFit
+          //  scene.scaleMode = .AspectFit
             
             /* Show debug */
             skView.showsPhysics = false
@@ -81,8 +82,11 @@ class MainScene: SKScene {
             skView.presentScene(scene)
         }
         
-//        titleLabel.fontName = "Phosphate"
-//        titleLabel.fontSize = 96
+        
+        
+        
+        titleLabel.fontName = "Phosphate-Inline"
+        titleLabel.fontSize = 96
     }
     
 }

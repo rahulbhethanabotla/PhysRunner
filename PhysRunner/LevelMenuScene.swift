@@ -21,6 +21,7 @@ class LevelMenuScene: SKScene {
     var level6: MSButtonNode!
     var level7: MSButtonNode!
     var level8: MSButtonNode!
+    var demoLevel: MSButtonNode!
     
     
     
@@ -37,7 +38,7 @@ class LevelMenuScene: SKScene {
             let scene = MainScene(fileNamed:"MainScene") as MainScene!
             
             /* Ensure correct aspect mode */
-            scene.scaleMode = .AspectFit
+        //®    scene.scaleMode = .AspectFit
             
             /* Show debug */
             skView.showsPhysics = false
@@ -67,9 +68,9 @@ class LevelMenuScene: SKScene {
             scene.scaleMode = .AspectFit
             
             /* Show debug */
-            skView.showsPhysics = true
-            skView.showsDrawCount = true
-            skView.showsFPS = true
+            skView.showsPhysics = false
+            skView.showsDrawCount = false
+            skView.showsFPS = false
             
             /* Start game scene */
             skView.presentScene(scene)
@@ -93,9 +94,9 @@ class LevelMenuScene: SKScene {
             scene.scaleMode = .AspectFit
             
             /* Show debug */
-            skView.showsPhysics = true
-            skView.showsDrawCount = true
-            skView.showsFPS = true
+            skView.showsPhysics = false
+            skView.showsDrawCount = false
+            skView.showsFPS = false
             
             /* Start game scene */
             skView.presentScene(scene)
@@ -118,9 +119,9 @@ class LevelMenuScene: SKScene {
             scene.scaleMode = .AspectFit
             
             /* Show debug */
-            skView.showsPhysics = true
-            skView.showsDrawCount = true
-            skView.showsFPS = true
+            skView.showsPhysics = false
+            skView.showsDrawCount = false
+            skView.showsFPS = false
             
             /* Start game scene */
             skView.presentScene(scene)
@@ -143,9 +144,9 @@ class LevelMenuScene: SKScene {
             scene.scaleMode = .AspectFit
             
             /* Show debug */
-            skView.showsPhysics = true
-            skView.showsDrawCount = true
-            skView.showsFPS = true
+            skView.showsPhysics = false
+            skView.showsDrawCount = false
+            skView.showsFPS = false
             
             /* Start game scene */
             skView.presentScene(scene)
@@ -168,9 +169,9 @@ class LevelMenuScene: SKScene {
             scene.scaleMode = .AspectFit
             
             /* Show debug */
-            skView.showsPhysics = true
-            skView.showsDrawCount = true
-            skView.showsFPS = true
+            skView.showsPhysics = false
+            skView.showsDrawCount = false
+            skView.showsFPS = false
             
             /* Start game scene */
             skView.presentScene(scene)
@@ -193,9 +194,9 @@ class LevelMenuScene: SKScene {
             scene.scaleMode = .AspectFit
             
             /* Show debug */
-            skView.showsPhysics = true
-            skView.showsDrawCount = true
-            skView.showsFPS = true
+            skView.showsPhysics = false
+            skView.showsDrawCount = false
+            skView.showsFPS = false
             
             /* Start game scene */
             skView.presentScene(scene)
@@ -219,9 +220,9 @@ class LevelMenuScene: SKScene {
             scene.scaleMode = .AspectFit
             
             /* Show debug */
-            skView.showsPhysics = true
-            skView.showsDrawCount = true
-            skView.showsFPS = true
+            skView.showsPhysics = false
+            skView.showsDrawCount = false
+            skView.showsFPS = false
             
             /* Start game scene */
             skView.presentScene(scene)
@@ -244,9 +245,9 @@ class LevelMenuScene: SKScene {
             scene.scaleMode = .AspectFit
             
             /* Show debug */
-            skView.showsPhysics = true
-            skView.showsDrawCount = true
-            skView.showsFPS = true
+            skView.showsPhysics = false
+            skView.showsDrawCount = false
+            skView.showsFPS = false
             
             /* Start game scene */
             skView.presentScene(scene)
@@ -269,11 +270,29 @@ class LevelMenuScene: SKScene {
             scene.scaleMode = .AspectFit
             
             /* Show debug */
-            skView.showsPhysics = true
-            skView.showsDrawCount = true
-            skView.showsFPS = true
+            skView.showsPhysics = false
+            skView.showsDrawCount = false
+            skView.showsFPS = false
             
             /* Start game scene */
+            skView.presentScene(scene)
+        }
+     
+        
+        
+        demoLevel = self.childNodeWithName("demoLevel") as! MSButtonNode
+        demoLevel.selectedHandler = {
+            let skView = self.view as SKView!
+            
+            let scene = GameScene(fileNamed: "GameScene") as GameScene!
+            scene.gameLevel = 9
+            
+            scene.scaleMode = .AspectFit
+            
+            skView.showsPhysics = false
+            skView.showsFPS = false
+            skView.showsDrawCount = false
+            
             skView.presentScene(scene)
         }
         

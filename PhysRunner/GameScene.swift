@@ -10,6 +10,7 @@ import SpriteKit
 import CoreGraphics
 import UIKit
 import Mixpanel
+import AVFoundation
 
 
 
@@ -20,6 +21,17 @@ enum GameState  {
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
+    var soundPlayer: AVAudioPlayer!
+    
+    var isSongPlaying: Bool = false
+    
+    
+    let soundPath = NSBundle.mainBundle().pathForResource("London Atoms.mp3", ofType: nil)!
+    
+    //let soundURL = NSURL(fileURLWithPath: soundPath)
+    var soundURL:NSURL {
+        return NSURL(fileURLWithPath: soundPath)
+    }
     
     let pi = M_PI
     
@@ -37,7 +49,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var goal: SKEmitterNode!
     
-    var charges: [(Int, Int, Int)] = [(0,0,0), (0,100,0), (50,30,0), (20,20,20), (10,10,10), (7, 7 , 7), (15, 15, 15), (20,20,20), (1, 1, 1)]
+    var charges: [(Int, Int, Int)] = [(0,0,0), (0,100,0), (50,30,0), (10,10,10), (10,10,10), (7, 7 , 7), (15, 15, 15), (20,20,20), (1, 1, 1), (5,5,5)]
     
     var cameraTarget: SKNode?
     
@@ -138,6 +150,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var levelMenuButtonYW: MSButtonNode!
     
+    var comingSoon: SKSpriteNode!
+    
+    var backButtonCS: MSButtonNode!
+    
+    var levelMenuButtonCS: MSButtonNode!
+    
+    var restartButtonCS: MSButtonNode!
+    
+    var cameraY: CGFloat!
+    
+    var cameraX: CGFloat!
+    
+    var isLevelWon: Bool!
+    
     
     override func didMoveToView(view: SKView) {
         
@@ -151,7 +177,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         /* Load the level */
-        var resourcePath = NSBundle.mainBundle().pathForResource("Level " + "\(gameLevel)", ofType: ".sks")
+        
+        let resourcePath = NSBundle.mainBundle().pathForResource("Level " + "\(gameLevel)", ofType: ".sks")
         let newLevel = SKReferenceNode (URL: NSURL (fileURLWithPath: resourcePath!))
         levelNode.addChild(newLevel)
         sceneHeight = newLevel.calculateAccumulatedFrame().height
@@ -182,8 +209,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //        blackSun = self.childNodeWithName("blackSun") as! SKSpriteNode
         //        blackSun.position = CGPointMake(0, 0)
         //        blackSun.zPosition = -2
-        //
         
+        if (!isSongPlaying) {
+            do {
+                let sound = try AVAudioPlayer(contentsOfURL: soundURL)
+                sound.numberOfLoops = Int(FP_INFINITE)
+                soundPlayer = sound
+                sound.play()
+            }
+            catch {
+                // new meme
+            }
+        }
         /* Setup the background lighting/ambience */
         
         light = self.childNodeWithName("//light") as! SKLightNode
@@ -327,12 +364,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let skView = self.view as SKView!
             let scene = GameScene(fileNamed: "GameScene") as GameScene!
             scene.gameLevel = self.gameLevel
-            scene.scaleMode = .AspectFill
+            scene.isSongPlaying = true
+          //  scene.scaleMode = .AspectFit
             skView.presentScene(scene)
+            
         }
-        
-        
-        
         
         pauseButton = optionsBar.childNodeWithName("pauseButton") as! MSButtonNode
         pauseButton.selectedHandler = {
@@ -396,7 +432,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let skView = self.view as SKView!
             let scene = GameScene(fileNamed: "GameScene") as GameScene!
             scene.gameLevel = self.gameLevel
-            scene.scaleMode = .AspectFill
+            scene.isSongPlaying = true
+            scene.scaleMode = .AspectFit
             skView.presentScene(scene)
         }
         
@@ -463,7 +500,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             let scene = GameScene(fileNamed: "GameScene") as GameScene!
             scene.gameLevel = self.gameLevel
-            scene.scaleMode = .AspectFill
+            scene.isSongPlaying = true
+            scene.scaleMode = .AspectFit
             skView.presentScene(scene)
             
             skView.showsFPS = false
@@ -477,7 +515,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         levelMenuButtonGO.selectedHandler = {
             let skView = self.view as SKView!
             let scene = LevelMenuScene(fileNamed: "LevelMenuScene") as LevelMenuScene!
-            scene.scaleMode = .AspectFill
+            scene.scaleMode = .AspectFit
             skView.presentScene(scene)
         }
         
@@ -485,9 +523,51 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         levelMenuButtonYW.selectedHandler = {
             let skView = self.view as SKView!
             let scene = LevelMenuScene(fileNamed: "LevelMenuScene") as LevelMenuScene!
-            scene.scaleMode = .AspectFill
+            scene.scaleMode = .AspectFit
             skView.presentScene(scene)
         }
+        
+        
+        comingSoon = self.childNodeWithName("comingSoon") as! SKSpriteNode
+        restartButtonCS = comingSoon.childNodeWithName("restartButtonCS") as! MSButtonNode
+        restartButtonCS.selectedHandler = {
+            self.gameState = .Active
+            let skView = self.view as SKView!
+            let scene = GameScene(fileNamed: "GameScene") as GameScene!
+            scene.gameLevel = self.gameLevel
+            scene.isSongPlaying = true
+            scene.scaleMode = .AspectFit
+            skView.presentScene(scene)
+        }
+        
+        backButtonCS = comingSoon.childNodeWithName("backButtonCS") as! MSButtonNode
+        backButtonCS.selectedHandler = {
+            /* Grab reference to our SpriteKit view */
+            let skView = self.view as SKView!
+            
+            /* Load Game scene */
+            let scene = MainScene(fileNamed:"MainScene") as MainScene!
+            
+            /* Ensure correct aspect mode */
+            scene.scaleMode = .AspectFit
+            
+            /* Show debug */
+            skView.showsPhysics = true
+            skView.showsDrawCount = true
+            skView.showsFPS = true
+            
+            /* Start game scene */
+            skView.presentScene(scene)
+        }
+        
+        levelMenuButtonCS = comingSoon.childNodeWithName("levelMenuButtonCS") as! MSButtonNode
+        levelMenuButtonCS.selectedHandler = {
+            let skView = self.view as SKView!
+            let scene = LevelMenuScene(fileNamed: "LevelMenuScene") as LevelMenuScene!
+            scene.scaleMode = .AspectFit
+            skView.presentScene(scene)
+        }
+        
         
         
     }
@@ -505,6 +585,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        
+        
+        
         if (wasPhysicsPressed) {
             for touch in touches {
                 let loc = touch.locationInNode(self)
@@ -601,6 +685,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if (hero.position.x < -50 || hero.position.y < -300 || hero.position.x > 1568) {
             heroDies(hero)
+            return
         }
         
         
@@ -608,23 +693,70 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         linearCharges.text = "\(charges[gameLevel].1)" + "x"
         radialCharges.text = "\(charges[gameLevel].2)" + "x"
         
+        cameraX = self.camera?.position.x
+        
+        cameraY = self.camera?.position.y
+        
+       
+        
         
         let goalPos = levelNode.convertPoint(goal.position, toNode: self)
         let heroPos = hero.parent!.convertPoint(hero.position, toNode: self)
-        if ( heroPos.x >= goalPos.x ) {
+        if ( heroPos.x >= goalPos.x && gameLevel < 8 && isLevelWon != false) {
             print(heroPos.x >= goalPos.x)
-            let moveY = SKAction.moveToY((self.camera?.position.y)!, duration: 0.6)
-            let moveX = SKAction.moveToX((self.camera?.position.x)!, duration: 0.6)
+            
+            //let moveY = SKAction.moveToY((self.camera?.position.y)!, duration: 0.6)
+            let moveY = SKAction.moveToY((200), duration: 0.6)
+            //let moveX = SKAction.moveToX((self.camera?.position.x)!, duration: 0.6)
+            let moveX = SKAction.moveToX((1280), duration: 0.6)
             let seq = SKAction.sequence([moveX, moveY])
             youWonScreen.runAction(seq)
+            isLevelWon = true
             gameState = .GameOver
             
             Mixpanel.sharedInstance().track("Level Cleared", properties: ["Level Number": "\(gameLevel)"])
         }
         
+        if ( heroPos.x >= goalPos.x && gameLevel == 8 && isLevelWon != false) {
+            print(heroPos.x >= goalPos.x)
+            //let moveY = SKAction.moveToY((self.camera?.position.y)!, duration: 0.6)
+            //let moveX = SKAction.moveToX((self.camera?.position.x)!, duration: 0.6)
+            let moveY = SKAction.moveToY((200), duration: 0.6)
+            let moveX = SKAction.moveToX((1280), duration: 0.6)
+            let seq = SKAction.sequence([moveX, moveY])
+            comingSoon.runAction(seq)
+            gameState = .GameOver
+            
+            Mixpanel.sharedInstance().track("Level Cleared", properties: ["Level Number": "\(gameLevel)"])
+        }
+
+    
+        
+        
+//        if ((isLevelWon) != nil) {
+//            if (isLevelWon == true) {
+//                var moveToX = SKAction.moveToX(youWonScreen.position.x, duration: 0.6)
+//                var moveToY = SKAction.moveToY(youWonScreen.position.y, duration: 0.6)
+//                var seq = SKAction.sequence([moveToX,moveToY])
+//                camera?.runAction(seq)
+//            }
+//            if (isLevelWon == false) {
+//                var moveToX = SKAction.moveToX(gameOverScreen.position.x, duration: 0.6)
+//                var moveToY = SKAction.moveToY(gameOverScreen.position.y, duration: 0.6)
+//                var seq = SKAction.sequence([moveToX,moveToY])
+//                camera?.runAction(seq)
+//            }
+//            
+//            
+//        }
+//
+        
+        
+        
+        
         /* setting the tutorial helpers */
         if (gameLevel == 0) {
-            var changeColor = SKAction.colorizeWithColor(UIColor.greenColor(), colorBlendFactor: 0.4, duration: 3.0)
+            var changeColor = SKAction.colorizeWithColor(UIColor.cyanColor(), colorBlendFactor: 0.4, duration: 3.0)
             var changeBack = SKAction.colorizeWithColor(UIColor.whiteColor(), colorBlendFactor: 0.4, duration: 3.0)
             var seq = SKAction.sequence([changeColor, changeBack])
             moveRightButton.runAction(seq)
@@ -733,12 +865,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             /* Set camera position to follow target horizontally, keep vertical locked */
             if (hero.xScale > 0) {
-                camera?.position = CGPoint(x: heroPosition.x + 203, y: heroPosition.y)
+//                camera?.position = CGPoint(x: heroPosition.x + 203, y: heroPosition.y)
+                var camPosition = CGPoint(x: heroPosition.x + 203, y: heroPosition.y)
+                camPosition.x.clamp(284, 1285)
+                camPosition.y.clamp(160 , sceneHeight - 160)
+                camera?.runAction(SKAction.moveTo(camPosition, duration: 0.4))
             }
             else {
-                camera?.position = CGPoint(x: heroPosition.x - 182, y: heroPosition.y)
+//                camera?.position = CGPoint(x: heroPosition.x - 182, y: heroPosition.y)
+                var camPosition = CGPoint(x: heroPosition.x - 182, y: heroPosition.y)
+                camPosition.x.clamp(284, 1285)
+                camPosition.y.clamp(160 , sceneHeight - 160)
+                camera?.runAction(SKAction.moveTo(camPosition, duration: 0.4))
             }
         }
+        
+//        hero.paused = true
         
         /* Clamp camera scrolling to our visible scene area only */
         camera?.position.x.clamp(283, 1285)
@@ -746,6 +888,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //        print("x: \(CGFloat((camera?.position.x)!)) heroX: \(hero.position.x)")
         //        print("y: \(CGFloat((camera?.position.y)!)) heroY: \(hero.position.y)")
         
+        
+        
+        
+//        
+//        if (abs(Float((hero.physicsBody?.velocity.dx)!)) < 1) {
+//            
+//            
+//            var idleText1 = SKTexture(imageNamed: "1")
+//            var growSide = SKAction.resizeToWidth(idleText1.size().width*1.3, duration: 0)
+//            var growUp = SKAction.resizeToHeight(idleText1.size().height*1.3, duration: 0)
+//            var idle = SKAction.animateWithTextures([idleText1], timePerFrame: 0)
+//            var seq = SKAction.sequence([growSide, growUp, idle])
+//            hero.runAction(seq)
+//            hero.speed = 0
+//            
+//        }
+//        else {
+//            hero.speed = 1
+//        }
+//        
+
+       
+    
+    
     }
     
     
@@ -837,20 +1003,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             node.removeFromParent()
         })
         
+        if (isLevelWon != true) {
+            self.runAction(heroDeath)
         
-        self.runAction(heroDeath)
+            let moveUp = SKAction.moveToY((self.camera?.position.y)!, duration: 0.6)
         
-        let moveUp = SKAction.moveToY((self.camera?.position.y)!, duration: 0.6)
+            let moveToX = SKAction.moveToX((self.camera?.position.x)!, duration: 0.6)
         
-        let moveToX = SKAction.moveToX((self.camera?.position.x)!, duration: 0.6)
+            let seq = SKAction.sequence([moveToX, moveUp])
+            
+            gameOverScreen.runAction(seq)
+            
+            isLevelWon = false
         
-        let seq = SKAction.sequence([moveToX, moveUp])
+            camera?.removeAllActions()
+            
+            gameState = .GameOver
+            
         
-        gameOverScreen.runAction(seq)
-        
-        gameState = .GameOver
-        
-        Mixpanel.sharedInstance().track("Level Failed", properties: ["Level Number": "\(gameLevel)"])
+            Mixpanel.sharedInstance().track("Level Failed", properties: ["Level Number": "\(gameLevel)"])
+        }
         
         
     }
