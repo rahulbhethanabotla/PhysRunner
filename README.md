@@ -1,3 +1,4 @@
 ### This is a project I worked on in the summer of 2016. It was my first project ever. It was super fun making it, even if it certainly is rough around the edges. I hope you like it.
-### AS OF THE CURRENT DATE checking back on this project, October 23 2016, I realized that Swift 3 has been released for a bit, so this project is filled with deprecated code. 
-### AS OF THE CURRENT DATE, OCTOBER 16 2017, I found out that my app is no longer even available on the app store and since my dependencies are all broken, including my APIs, it looks like it will be impossible to produce or work on this app in any reasonable way since several necessary files have been lost on this computer or do not exist in the required functional capacity for this project.
+
+
+### As of the current date, October 13 2016, this code is all deprecated.
